@@ -14,7 +14,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Switch;
 import android.widget.Toast;
@@ -73,8 +72,6 @@ public class MainActivity extends AppCompatActivity {
         tv_sensor = findViewById(R.id.tv_sensor);
         tv_updates = findViewById(R.id.tv_updates);
         tv_address = findViewById(R.id.tv_address);
-        sw_gps = findViewById(R.id.sw_gps);
-        sw_locations_updates = findViewById(R.id.sw_locations_updates);
         btn_newWayPoint = findViewById(R.id.btn_newWayPoint);
         btn_showWayPointList = findViewById(R.id.btn_showWayPointList);
         tv_wayPointCounts = findViewById(R.id.tv_countOfCrumbs);
@@ -138,35 +135,10 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        sw_gps.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (sw_gps.isChecked()) {
-                    locationRequest.setPriority(Priority.PRIORITY_HIGH_ACCURACY);
-                    tv_sensor.setText("Using GPS sensors");
-                } else {
-                    locationRequest.setPriority(Priority.PRIORITY_BALANCED_POWER_ACCURACY);
-                    tv_sensor.setText("Using Towers + WIFI");
-                }
-            }
-        });
-
-        sw_locations_updates.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (sw_locations_updates.isChecked()) {
-                    // turn on location tracking
-                    startLocationUpdates();
-                } else {
-                    // turn off tracking
-                    stopLocationUpdates();
-                }
-            }
-        });
         updateGPS();
     } // end of onCreate method
 
-    private void stopLocationUpdates() {
+    void stopLocationUpdates() {
         tv_updates.setText("Location is NOT being tracked");
         tv_lat.setText("Not tracking location");
         tv_lon.setText("Not tracking location");
@@ -178,7 +150,7 @@ public class MainActivity extends AppCompatActivity {
         fusedLocationProviderClient.removeLocationUpdates(locationCallBack);
     }
 
-    private void startLocationUpdates() {
+    void startLocationUpdates() {
         tv_updates.setText("Location is being tracked");
         if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             fusedLocationProviderClient.requestLocationUpdates(locationRequest, locationCallBack, null);
@@ -201,7 +173,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void updateGPS() {
+    void updateGPS() {
         // get permissions from the user to track GPS
         // get the current location from the fused client
         // update the UI - i.e. set all properties in their associated text view items

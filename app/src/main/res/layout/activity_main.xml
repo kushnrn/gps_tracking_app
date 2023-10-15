@@ -100,7 +100,7 @@
         android:layout_marginTop="16dp"
         android:text="Sensor:"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sw_gps" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_address" />
 
     <TextView
         android:id="@+id/tv_sensor"
@@ -116,7 +116,7 @@
         android:layout_height="wrap_content"
         android:text="Updates:"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sw_locations_updates" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_sensor" />
 
     <TextView
         android:id="@+id/tv_updates"
@@ -126,27 +126,27 @@
         app:layout_constraintStart_toEndOf="@+id/tv_labelupdates"
         app:layout_constraintTop_toTopOf="@+id/tv_labelupdates" />
 
-    <Switch
-        android:id="@+id/sw_locations_updates"
-        android:layout_width="wrap_content"
-        android:layout_height="48dp"
-        android:layout_marginTop="16dp"
-        android:checked="true"
-        android:text="Location Updates"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/divider" />
+<!--    <Switch-->
+<!--        android:id="@+id/sw1_locations_updates"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="48dp"-->
+<!--        android:layout_marginTop="16dp"-->
+<!--        android:checked="true"-->
+<!--        android:text="Location Updates"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.501"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/divider" />-->
 
-    <Switch
-        android:id="@+id/sw_gps"
-        android:layout_width="wrap_content"
-        android:layout_height="48dp"
-        android:layout_marginTop="16dp"
-        android:text="GPS/SavePower"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_labelupdates" />
+<!--    <Switch-->
+<!--        android:id="@+id/sw1_gps"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="48dp"-->
+<!--        android:layout_marginTop="16dp"-->
+<!--        android:text="GPS/SavePower"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/tv_labelupdates" />-->
 
     <TextView
         android:id="@+id/tv_address"
@@ -222,19 +222,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_showWayPointList" />
 
-    <ImageButton
-        android:id="@+id/btn_settings"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="200dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginBottom="650dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/tv_lat"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@android:drawable/ic_menu_preferences" />
+<!--    <ImageButton-->
+<!--        android:id="@+id/btn_settings"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginStart="200dp"-->
+<!--        android:layout_marginTop="10dp"-->
+<!--        android:layout_marginEnd="10dp"-->
+<!--        android:layout_marginBottom="650dp"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toEndOf="@+id/tv_lat"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:srcCompat="@android:drawable/ic_menu_preferences" />-->
 
     <Button
         android:id="@+id/btn_preferences"
