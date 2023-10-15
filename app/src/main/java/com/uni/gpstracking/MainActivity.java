@@ -14,6 +14,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Switch;
 import android.widget.Toast;
@@ -37,7 +38,8 @@ public class MainActivity extends AppCompatActivity {
     // references to the UI elements
 
     TextView tv_lat, tv_lon, tv_altitude, tv_accuracy, tv_speed, tv_updates, tv_sensor, tv_address, tv_wayPointCounts;
-    Button btn_newWayPoint, btn_showWayPointList, btn_showMap;
+    Button btn_newWayPoint, btn_showWayPointList, btn_showMap, btn_preferences;
+//    ImageButton btn_settings;
     Switch sw_locations_updates, sw_gps;
 
     // Variable to remember if we are tracking location or not
@@ -70,7 +72,6 @@ public class MainActivity extends AppCompatActivity {
         tv_speed = findViewById(R.id.tv_speed);
         tv_sensor = findViewById(R.id.tv_sensor);
         tv_updates = findViewById(R.id.tv_updates);
-        tv_address = findViewById(R.id.tv_updates);
         tv_address = findViewById(R.id.tv_address);
         sw_gps = findViewById(R.id.sw_gps);
         sw_locations_updates = findViewById(R.id.sw_locations_updates);
@@ -78,6 +79,7 @@ public class MainActivity extends AppCompatActivity {
         btn_showWayPointList = findViewById(R.id.btn_showWayPointList);
         tv_wayPointCounts = findViewById(R.id.tv_countOfCrumbs);
         btn_showMap = findViewById(R.id.btn_showMap);
+        btn_preferences = findViewById(R.id.btn_preferences);
 
 
 
@@ -124,6 +126,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(MainActivity.this, MapsActivity.class);
+                startActivity(i);
+            }
+        });
+
+        btn_preferences.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(MainActivity.this, SettingsActivity.class);
                 startActivity(i);
             }
         });
