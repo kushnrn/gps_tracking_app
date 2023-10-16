@@ -27,6 +27,7 @@ public class SettingsActivity extends MainActivity {
 
         sw_locations_updates = findViewById(R.id.sw_locations_updates);
         sw_gps = findViewById(R.id.sw_gps);
+        sw_gps.setChecked(Context.getGpsOn());
         sw_gps.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -38,6 +39,7 @@ public class SettingsActivity extends MainActivity {
                     tv_sensor.setText("Using Towers + WIFI");
 
                 }
+                Context.setGpsOn(sw_gps.isChecked());
             }
         });
         sw_locations_updates.setChecked(Context.getLocationUpdate());

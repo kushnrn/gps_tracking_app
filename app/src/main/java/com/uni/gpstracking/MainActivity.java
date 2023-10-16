@@ -54,7 +54,9 @@ public class MainActivity extends AppCompatActivity {
     FusedLocationProviderClient fusedLocationProviderClient;
 
     // A config file for all settings related to FusedLocationProviderClient
-    LocationRequest locationRequest;
+    MyApplication myApplication = MyApplication.getInstance();
+    LocationRequest locationRequest = myApplication.getLocationRequest();
+
     LocationCallback locationCallBack;
 
     @Override
@@ -79,13 +81,8 @@ public class MainActivity extends AppCompatActivity {
         btn_preferences = findViewById(R.id.btn_preferences);
 
 
-
         // set all properties of LocationRequest
-
-        locationRequest = new LocationRequest.Builder(Priority.PRIORITY_BALANCED_POWER_ACCURACY, 1000 * DEFAULT_UPDATE_INTERVAL)
-                .setWaitForAccurateLocation(false)
-                .setMinUpdateIntervalMillis(1000 * FAST_UPDATE_INTERVAL)
-                .build();
+        locationRequest = MyApplication.getLocationRequest();
 
         // event that is triggered whenever the update interval is met
         locationCallBack = new LocationCallback() {
@@ -138,14 +135,14 @@ public class MainActivity extends AppCompatActivity {
         updateGPS();
     } // end of onCreate method
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        updateGPS();
+    }
+
     void stopLocationUpdates() {
-        tv_updates.setText("Location is NOT being tracked");
-        tv_lat.setText("Not tracking location");
-        tv_lon.setText("Not tracking location");
-        tv_speed.setText("Not tracking location");
-        tv_address.setText("Not tracking location");
-        tv_altitude.setText("Not tracking location");
-        tv_sensor.setText("Not tracking location");
+
 
         fusedLocationProviderClient.removeLocationUpdates(locationCallBack);
     }
@@ -153,7 +150,7 @@ public class MainActivity extends AppCompatActivity {
     void startLocationUpdates() {
         tv_updates.setText("Location is being tracked");
         if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            fusedLocationProviderClient.requestLocationUpdates(locationRequest, locationCallBack, null);
+            fusedLocationProviderClient.requestLocationUpdates(MyApplication.getLocationRequest(), locationCallBack, null);
         }
         updateGPS();
     }
@@ -204,37 +201,51 @@ public class MainActivity extends AppCompatActivity {
 }
 
     private void updateUIValues(Location location) {
+
+
+        if (myApplication.location_updated ){
+            tv_lat.setText(String.valueOf(location.getLatitude()));
+            tv_lon.setText(String.valueOf(location.getLongitude()));
+            tv_accuracy.setText(String.valueOf(location.getAccuracy()));
+
+            if(location.hasAltitude()) {
+                tv_altitude.setText(String.valueOf(location.getAltitude()));
+            } else {
+                tv_altitude.setText("Not available");
+            }
+
+            if(location.hasSpeed()) {
+                tv_speed.setText(String.valueOf(location.getSpeed()));
+            } else {
+                tv_speed.setText("Not available");
+            }
+
+            Geocoder geocoder = new Geocoder(MainActivity.this);
+
+            try {
+                List<Address> addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
+                tv_address.setText((addresses.get(0).getAddressLine(0)));
+            }
+            catch (Exception e){
+                tv_address.setText("Unable to get street address");
+            }
+
+            MyApplication myApplication = (MyApplication)getApplicationContext();
+            savedLocations = myApplication.getMyLocations();
+
+            // show the number of waypoints saved
+            tv_wayPointCounts.setText(Integer.toString(savedLocations.size()));
+        }
+        else {
+            tv_updates.setText("Location is NOT being tracked");
+            tv_lat.setText("Not tracking location");
+            tv_lon.setText("Not tracking location");
+            tv_speed.setText("Not tracking location");
+            tv_address.setText("Not tracking location");
+            tv_altitude.setText("Not tracking location");
+            tv_sensor.setText("Not tracking location");
+        }
         // update all of the text view objects with a location
-        tv_lat.setText(String.valueOf(location.getLatitude()));
-        tv_lon.setText(String.valueOf(location.getLongitude()));
-        tv_accuracy.setText(String.valueOf(location.getAccuracy()));
 
-        if(location.hasAltitude()) {
-            tv_altitude.setText(String.valueOf(location.getAltitude()));
-        } else {
-            tv_altitude.setText("Not available");
-        }
-
-        if(location.hasSpeed()) {
-            tv_speed.setText(String.valueOf(location.getSpeed()));
-        } else {
-            tv_speed.setText("Not available");
-        }
-
-        Geocoder geocoder = new Geocoder(MainActivity.this);
-
-        try {
-            List<Address> addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
-            tv_address.setText((addresses.get(0).getAddressLine(0)));
-        }
-        catch (Exception e){
-            tv_address.setText("Unable to get street address");
-        }
-
-        MyApplication myApplication = (MyApplication)getApplicationContext();
-        savedLocations = myApplication.getMyLocations();
-
-        // show the number of waypoints saved
-        tv_wayPointCounts.setText(Integer.toString(savedLocations.size()));
     }
     }

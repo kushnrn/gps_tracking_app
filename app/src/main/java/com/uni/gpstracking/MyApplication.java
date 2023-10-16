@@ -1,6 +1,8 @@
 package com.uni.gpstracking;
 import android.app.Application;
 import android.location.Location;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.Priority;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +13,8 @@ public class MyApplication extends Application{
     public Boolean gps_on = false;
 
     private List<Location> myLocations;
+    private static LocationRequest locationRequest;
+
 
     public List<Location> getMyLocations() {
         return myLocations;
@@ -20,7 +24,7 @@ public class MyApplication extends Application{
         this.myLocations = myLocations;
     }
 
-    public MyApplication getInstance() {
+    public static MyApplication getInstance() {
         return singleton;
     }
 
@@ -28,6 +32,11 @@ public class MyApplication extends Application{
         super.onCreate();
         singleton = this;
         myLocations = new ArrayList<>();
+
+        locationRequest = new LocationRequest();
+        locationRequest.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY)
+                .setInterval(1000 * 30)
+                .setFastestInterval(1000 * 5);
     }
 
     public Boolean getLocationUpdate() {
@@ -38,6 +47,12 @@ public class MyApplication extends Application{
         location_updated = location_updated1;
     }
 
+    public static void setLocationRequest(LocationRequest location_request){
+        locationRequest = location_request;
+    }
+    public static LocationRequest getLocationRequest(){
+        return locationRequest;
+    }
     public Boolean getGpsOn() {
         return gps_on;
     }
