@@ -14,6 +14,15 @@ public class MyApplication extends Application{
 
     private List<Location> myLocations;
     private static LocationRequest locationRequest;
+    private static Location location;
+
+    public static Location getLocation(){
+        return location;
+    }
+
+    public void setLocation(Location locationUpdated) {
+        location = locationUpdated;
+    }
 
 
     public List<Location> getMyLocations() {
@@ -60,5 +69,7 @@ public class MyApplication extends Application{
     public void setGpsOn(Boolean gps_on1) {
         gps_on = gps_on1;
     }
+
+
 
 }

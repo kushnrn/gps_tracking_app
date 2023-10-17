@@ -31,14 +31,18 @@ public class SettingsActivity extends MainActivity {
         sw_gps.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                int currentPriority = locationRequest.getPriority();
                 if (sw_gps.isChecked()) {
+
                     locationRequest.setPriority(Priority.PRIORITY_HIGH_ACCURACY);
-                    tv_sensor.setText("Using GPS sensors");
+
+//                    tv_sensor.setText("Using GPS sensors");
                 } else {
                     locationRequest.setPriority(Priority.PRIORITY_BALANCED_POWER_ACCURACY);
-                    tv_sensor.setText("Using Towers + WIFI");
+//                    tv_sensor.setText("Using Towers + WIFI");
 
                 }
+                int newCurrentPriority = locationRequest.getPriority();
                 Context.setGpsOn(sw_gps.isChecked());
             }
         });

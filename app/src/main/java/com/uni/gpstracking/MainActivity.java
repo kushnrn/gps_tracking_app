@@ -36,9 +36,9 @@ public class MainActivity extends AppCompatActivity {
     private static final int PERMISSIONS_FINE_LOCATIONS = 99;
     // references to the UI elements
 
-    TextView tv_lat, tv_lon, tv_altitude, tv_accuracy, tv_speed, tv_updates, tv_sensor, tv_address, tv_wayPointCounts;
-    Button btn_newWayPoint, btn_showWayPointList, btn_showMap, btn_preferences;
-//    ImageButton btn_settings;
+//    TextView tv_lat, tv_lon, tv_altitude, tv_accuracy, tv_speed, tv_updates, tv_sensor, tv_address;
+    Button  btn_showMap, btn_preferences;
+
     Switch sw_locations_updates, sw_gps;
 
     // Variable to remember if we are tracking location or not
@@ -66,17 +66,14 @@ public class MainActivity extends AppCompatActivity {
 
         //give each UI variable a value
 
-        tv_lat = findViewById(R.id.tv_lat);
-        tv_lon = findViewById(R.id.tv_lon);
-        tv_altitude = findViewById(R.id.tv_altitude);
-        tv_accuracy = findViewById(R.id.tv_accuracy);
-        tv_speed = findViewById(R.id.tv_speed);
-        tv_sensor = findViewById(R.id.tv_sensor);
-        tv_updates = findViewById(R.id.tv_updates);
-        tv_address = findViewById(R.id.tv_address);
-        btn_newWayPoint = findViewById(R.id.btn_newWayPoint);
-        btn_showWayPointList = findViewById(R.id.btn_showWayPointList);
-        tv_wayPointCounts = findViewById(R.id.tv_countOfCrumbs);
+//        tv_lat = findViewById(R.id.tv_lat);
+//        tv_lon = findViewById(R.id.tv_lon);
+//        tv_altitude = findViewById(R.id.tv_altitude);
+//        tv_accuracy = findViewById(R.id.tv_accuracy);
+//        tv_speed = findViewById(R.id.tv_speed);
+//        tv_sensor = findViewById(R.id.tv_sensor);
+//        tv_updates = findViewById(R.id.tv_updates);
+//        tv_address = findViewById(R.id.tv_address);
         btn_showMap = findViewById(R.id.btn_showMap);
         btn_preferences = findViewById(R.id.btn_preferences);
 
@@ -92,34 +89,16 @@ public class MainActivity extends AppCompatActivity {
                 super.onLocationResult(locationResult);
 
                 // save the location
-                updateUIValues(locationResult.getLastLocation());
+//                updateUIValues(locationResult.getLastLocation());
             }
         };
 
-        btn_newWayPoint.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // get the gps location
-
-                //add lhe new location to the global list
-                MyApplication myApplication = (MyApplication)getApplicationContext();
-                savedLocations = myApplication.getMyLocations();
-                savedLocations.add(currentLocation);
-            }
-        });
-
-        btn_showWayPointList.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(MainActivity.this, ShowSavedLocationsList.class);
-                startActivity(i);
-            }
-        });
 
         btn_showMap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(MainActivity.this, MapsActivity.class);
+                i.putExtra("currentLocation", currentLocation);
                 startActivity(i);
             }
         });
@@ -148,7 +127,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     void startLocationUpdates() {
-        tv_updates.setText("Location is being tracked");
+//        tv_updates.setText("Location is being tracked");
         if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             fusedLocationProviderClient.requestLocationUpdates(MyApplication.getLocationRequest(), locationCallBack, null);
         }
@@ -183,8 +162,9 @@ public class MainActivity extends AppCompatActivity {
                 public void onSuccess(Location location) {
                     // we got permissions. Put the values of location. XXX into the UI components
                     if(location != null) {
-                        updateUIValues(location);
+//                        updateUIValues(location);
                         currentLocation = location;
+                        myApplication.setLocation(location);
                     }
 
 
@@ -200,52 +180,50 @@ public class MainActivity extends AppCompatActivity {
     }
 }
 
-    private void updateUIValues(Location location) {
-
-
-        if (myApplication.location_updated ){
-            tv_lat.setText(String.valueOf(location.getLatitude()));
-            tv_lon.setText(String.valueOf(location.getLongitude()));
-            tv_accuracy.setText(String.valueOf(location.getAccuracy()));
-
-            if(location.hasAltitude()) {
-                tv_altitude.setText(String.valueOf(location.getAltitude()));
-            } else {
-                tv_altitude.setText("Not available");
-            }
-
-            if(location.hasSpeed()) {
-                tv_speed.setText(String.valueOf(location.getSpeed()));
-            } else {
-                tv_speed.setText("Not available");
-            }
-
-            Geocoder geocoder = new Geocoder(MainActivity.this);
-
-            try {
-                List<Address> addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
-                tv_address.setText((addresses.get(0).getAddressLine(0)));
-            }
-            catch (Exception e){
-                tv_address.setText("Unable to get street address");
-            }
-
-            MyApplication myApplication = (MyApplication)getApplicationContext();
-            savedLocations = myApplication.getMyLocations();
-
-            // show the number of waypoints saved
-            tv_wayPointCounts.setText(Integer.toString(savedLocations.size()));
-        }
-        else {
-            tv_updates.setText("Location is NOT being tracked");
-            tv_lat.setText("Not tracking location");
-            tv_lon.setText("Not tracking location");
-            tv_speed.setText("Not tracking location");
-            tv_address.setText("Not tracking location");
-            tv_altitude.setText("Not tracking location");
-            tv_sensor.setText("Not tracking location");
-        }
-        // update all of the text view objects with a location
-
-    }
+//    private void updateUIValues(Location location) {
+//
+//
+//        if (myApplication.location_updated ){
+//            tv_lat.setText(String.valueOf(location.getLatitude()));
+//            tv_lon.setText(String.valueOf(location.getLongitude()));
+//            tv_accuracy.setText(String.valueOf(location.getAccuracy()));
+//
+//            if(location.hasAltitude()) {
+//                tv_altitude.setText(String.valueOf(location.getAltitude()));
+//            } else {
+//                tv_altitude.setText("Not available");
+//            }
+//
+//            if(location.hasSpeed()) {
+//                tv_speed.setText(String.valueOf(location.getSpeed()));
+//            } else {
+//                tv_speed.setText("Not available");
+//            }
+//
+//            Geocoder geocoder = new Geocoder(MainActivity.this);
+//
+//            try {
+//                List<Address> addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
+//                tv_address.setText((addresses.get(0).getAddressLine(0)));
+//            }
+//            catch (Exception e){
+//                tv_address.setText("Unable to get street address");
+//            }
+//
+//            MyApplication myApplication = (MyApplication)getApplicationContext();
+//            savedLocations = myApplication.getMyLocations();
+//
+//        }
+//        else {
+//            tv_updates.setText("Location is NOT being tracked");
+//            tv_lat.setText("Not tracking location");
+//            tv_lon.setText("Not tracking location");
+//            tv_speed.setText("Not tracking location");
+//            tv_address.setText("Not tracking location");
+//            tv_altitude.setText("Not tracking location");
+//            tv_sensor.setText("Not tracking location");
+//        }
+//        // update all of the text view objects with a location
+//
+//    }
     }

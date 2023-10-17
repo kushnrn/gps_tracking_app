@@ -1,12 +1,22 @@
 package com.uni.gpstracking;
 
 import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentActivity;
 
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.location.Location;
+import android.location.LocationRequest;
+import android.os.Build;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
+import com.google.android.gms.location.LocationCallback;
+import com.google.android.gms.location.LocationResult;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -14,6 +24,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.uni.gpstracking.databinding.ActivityMapsBinding;
 
 import java.util.List;
@@ -21,6 +32,7 @@ import java.util.List;
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
+    Button btn_report;
 
     List<Location> savedLocations;
     private ActivityMapsBinding binding;
@@ -39,6 +51,17 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         MyApplication myApplication = (MyApplication)getApplicationContext();
         savedLocations = myApplication.getMyLocations();
+
+        btn_report = findViewById(R.id.btn_report);
+
+        btn_report.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(MapsActivity.this, ReportActivity.class);
+                startActivity(i);
+            }
+        });
+
     }
 
     /**
@@ -54,36 +77,21 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
-//        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-//        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
-        LatLng lastlocationPlaced = sydney;
+        Intent intent = getIntent();
+        Location location = intent.getParcelableExtra("currentLocation");
 
-        for (Location location : savedLocations) {
-            LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
-            MarkerOptions markerOptions = new MarkerOptions();
-            markerOptions.position(latLng);
-            markerOptions.title("Lat:" + location.getLatitude() +" Lon:" + location.getLongitude());
-            mMap.addMarker(markerOptions);
-            lastlocationPlaced = latLng;
+        double latitude = location.getLatitude();
+        double longitude = location.getLongitude();
 
-        }
-        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(lastlocationPlaced, 12.0f));
-        mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
-            @Override
-            public boolean onMarkerClick(@NonNull Marker marker) {
-                // count the number of times the pin is clicked
-                Integer clicks = (Integer) marker.getTag();
-                if ( clicks == null) {
-                    clicks = 0;
-                } 
-                clicks++;
-                marker.setTag(clicks);
-                Toast.makeText(MapsActivity.this, "Marker " + marker.getTitle() + " was clicked " + marker.getTag() + " times.", Toast.LENGTH_SHORT).show();
+        LatLng currentLocation = new LatLng(Double.parseDouble(String.valueOf(latitude)), Double.parseDouble(String.valueOf(longitude)));
+        // Now you have the latitude and longitude
+        // You can use them as needed.
 
-                return false;
-            }
-        });
+        mMap.addMarker(new MarkerOptions()
+                .position(currentLocation)
+                .title("Your location"));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLocation, 20));
+
+
     }
 }
