@@ -11,6 +11,10 @@ public class MyApplication extends Application{
     private static MyApplication singleton;
     public Boolean location_updated = true;
     public Boolean gps_on = false;
+    public Boolean high_accuracy_on = true;
+    public Boolean balanced_accuracy_on = false;
+    public Boolean low_power_on = false;
+    public String sensor;
 
     private List<Location> myLocations;
     private static LocationRequest locationRequest;
@@ -56,6 +60,30 @@ public class MyApplication extends Application{
         location_updated = location_updated1;
     }
 
+    public Boolean getHighAccuracyOn() {
+        return high_accuracy_on;
+    }
+
+    public void setHighAccuracyMode(Boolean highAccuracy) {
+        high_accuracy_on = highAccuracy;
+    }
+
+    public Boolean getBalancedAccuracy() {
+        return balanced_accuracy_on;
+    }
+
+    public void setBalancedMode(Boolean balancedAccuracy) {
+        balanced_accuracy_on = balancedAccuracy;
+    }
+
+    public Boolean getLowAccuracy() {
+        return low_power_on;
+    }
+
+    public void setLowMode(Boolean lowAccuracy) {
+        low_power_on = lowAccuracy;
+    }
+
     public static void setLocationRequest(LocationRequest location_request){
         locationRequest = location_request;
     }
@@ -70,6 +98,8 @@ public class MyApplication extends Application{
         gps_on = gps_on1;
     }
 
+    public String getSensor() { return sensor; }
 
+    public void setSensor(String newSensor) { sensor = newSensor; };
 
 }

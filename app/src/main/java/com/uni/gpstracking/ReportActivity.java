@@ -6,6 +6,7 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
 
 import java.util.List;
@@ -33,14 +34,18 @@ public class ReportActivity extends MainActivity {
             tv_lat.setText(String.valueOf(currentLocation.getLatitude()));
             tv_lon.setText(String.valueOf(currentLocation.getLongitude()));
             tv_accuracy.setText(String.valueOf(currentLocation.getAccuracy()));
+            tv_sensor.setText((myApplication.getSensor()));
 
-            if(myApplication.getGpsOn()) {
-                tv_sensor.setText("Using GPS sensors");
-            } else {
-                tv_sensor.setText("Using Towers + WIFI");
-            }
+//            if(myApplication.getGpsOn()) {
+//                tv_sensor.setText("Using GPS sensors");
+//            } else {
+//                tv_sensor.setText("Using Towers + WIFI");
+//            }
+
 
             if(currentLocation.hasAltitude()) {
+                Double alt = currentLocation.getAltitude();
+                Log.e("alt", String.valueOf(alt));
                 tv_altitude.setText(String.valueOf(currentLocation.getAltitude()));
             } else {
                 tv_altitude.setText("Not available");

@@ -3,6 +3,7 @@ package com.uni.gpstracking;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.RadioButton;
 import android.widget.Switch;
 
 import androidx.appcompat.app.ActionBar;
@@ -14,24 +15,26 @@ import com.google.android.gms.location.Priority;
 public class SettingsActivity extends MainActivity {
 
     Switch sw1_locations_updates, sw1_gps;
-
+    RadioButton rb_high_power, rb_balanced_power, rb_low_power;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.settings_activity);
 
-
         MyApplication Context = (MyApplication) getApplicationContext();
-
 
         sw_locations_updates = findViewById(R.id.sw_locations_updates);
         sw_gps = findViewById(R.id.sw_gps);
         sw_gps.setChecked(Context.getGpsOn());
+        rb_high_power = findViewById(R.id.rb_high_power);
+        rb_balanced_power = findViewById(R.id.rb_balanced_power);
+        rb_low_power = findViewById(R.id.rb_low_power);
+
         sw_gps.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                int currentPriority = locationRequest.getPriority();
+//                int currentPriority = locationRequest.getPriority();
                 if (sw_gps.isChecked()) {
 
                     locationRequest.setPriority(Priority.PRIORITY_HIGH_ACCURACY);
@@ -42,10 +45,57 @@ public class SettingsActivity extends MainActivity {
 //                    tv_sensor.setText("Using Towers + WIFI");
 
                 }
-                int newCurrentPriority = locationRequest.getPriority();
+//                int newCurrentPriority = locationRequest.getPriority();
                 Context.setGpsOn(sw_gps.isChecked());
             }
         });
+
+        rb_high_power.setChecked(Context.getHighAccuracyOn());
+        rb_high_power.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                locationRequest.setPriority(Priority.PRIORITY_HIGH_ACCURACY);
+                myApplication.setSensor("GPS, Wi-fi and cell towers");
+                Context.setLowMode(false);
+                Context.setHighAccuracyMode(true);
+                Context.setBalancedMode(false);
+            }
+        });
+
+        rb_balanced_power.setChecked(Context.getBalancedAccuracy());
+        rb_balanced_power.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                locationRequest.setPriority(Priority.PRIORITY_BALANCED_POWER_ACCURACY);
+                myApplication.setSensor("Wi-fi and cell towers");
+                Context.setLowMode(false);
+                Context.setHighAccuracyMode(false);
+                Context.setBalancedMode(true);
+
+            }
+        });
+
+        rb_low_power.setChecked(Context.getLowAccuracy());
+        rb_low_power.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                locationRequest.setPriority(Priority.PRIORITY_LOW_POWER);
+                myApplication.setSensor("Cell towers");
+                Context.setLowMode(true);
+                Context.setHighAccuracyMode(false);
+                Context.setBalancedMode(false);
+
+            }
+        });
+
+//        rb_no_power.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                locationRequest.setPriority(Priority.PRIORITY_NO_POWER);
+//                myApplication.setSensor("No location updates (locations triggered by other apps)");
+//            }
+//        });
+
         sw_locations_updates.setChecked(Context.getLocationUpdate());
         sw_locations_updates.setOnClickListener(new View.OnClickListener() {
             @Override

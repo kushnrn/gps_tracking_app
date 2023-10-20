@@ -64,16 +64,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //give each UI variable a value
-
-//        tv_lat = findViewById(R.id.tv_lat);
-//        tv_lon = findViewById(R.id.tv_lon);
-//        tv_altitude = findViewById(R.id.tv_altitude);
-//        tv_accuracy = findViewById(R.id.tv_accuracy);
-//        tv_speed = findViewById(R.id.tv_speed);
-//        tv_sensor = findViewById(R.id.tv_sensor);
-//        tv_updates = findViewById(R.id.tv_updates);
-//        tv_address = findViewById(R.id.tv_address);
         btn_showMap = findViewById(R.id.btn_showMap);
         btn_preferences = findViewById(R.id.btn_preferences);
 
@@ -97,9 +87,15 @@ public class MainActivity extends AppCompatActivity {
         btn_showMap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(MainActivity.this, MapsActivity.class);
-                i.putExtra("currentLocation", currentLocation);
-                startActivity(i);
+                if (currentLocation.getAccuracy() > 40.0) {
+                    Intent i = new Intent(MainActivity.this, MapsActivity.class);
+                    i.putExtra("currentLocation", currentLocation);
+                    startActivity(i);
+                } else {
+                    Intent i = new Intent(MainActivity.this, DecisionActivity.class);
+                    startActivity(i);
+                }
+
             }
         });
 
@@ -180,50 +176,5 @@ public class MainActivity extends AppCompatActivity {
     }
 }
 
-//    private void updateUIValues(Location location) {
-//
-//
-//        if (myApplication.location_updated ){
-//            tv_lat.setText(String.valueOf(location.getLatitude()));
-//            tv_lon.setText(String.valueOf(location.getLongitude()));
-//            tv_accuracy.setText(String.valueOf(location.getAccuracy()));
-//
-//            if(location.hasAltitude()) {
-//                tv_altitude.setText(String.valueOf(location.getAltitude()));
-//            } else {
-//                tv_altitude.setText("Not available");
-//            }
-//
-//            if(location.hasSpeed()) {
-//                tv_speed.setText(String.valueOf(location.getSpeed()));
-//            } else {
-//                tv_speed.setText("Not available");
-//            }
-//
-//            Geocoder geocoder = new Geocoder(MainActivity.this);
-//
-//            try {
-//                List<Address> addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
-//                tv_address.setText((addresses.get(0).getAddressLine(0)));
-//            }
-//            catch (Exception e){
-//                tv_address.setText("Unable to get street address");
-//            }
-//
-//            MyApplication myApplication = (MyApplication)getApplicationContext();
-//            savedLocations = myApplication.getMyLocations();
-//
-//        }
-//        else {
-//            tv_updates.setText("Location is NOT being tracked");
-//            tv_lat.setText("Not tracking location");
-//            tv_lon.setText("Not tracking location");
-//            tv_speed.setText("Not tracking location");
-//            tv_address.setText("Not tracking location");
-//            tv_altitude.setText("Not tracking location");
-//            tv_sensor.setText("Not tracking location");
-//        }
-//        // update all of the text view objects with a location
-//
-//    }
+
     }
