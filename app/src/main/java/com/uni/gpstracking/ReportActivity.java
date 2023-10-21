@@ -34,7 +34,13 @@ public class ReportActivity extends MainActivity {
             tv_lat.setText(String.valueOf(currentLocation.getLatitude()));
             tv_lon.setText(String.valueOf(currentLocation.getLongitude()));
             tv_accuracy.setText(String.valueOf(currentLocation.getAccuracy()));
-            tv_sensor.setText((myApplication.getSensor()));
+            if (myApplication.getSensor() == null) {
+                tv_sensor.setText(currentLocation.getProvider());
+            } else {
+                tv_sensor.setText((myApplication.getSensor()));
+            }
+
+
 
 //            if(myApplication.getGpsOn()) {
 //                tv_sensor.setText("Using GPS sensors");
@@ -78,6 +84,7 @@ public class ReportActivity extends MainActivity {
             tv_altitude.setText("Not tracking location");
             tv_sensor.setText("Not tracking location");
         }
+
 
 
 

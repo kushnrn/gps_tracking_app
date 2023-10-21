@@ -53,14 +53,19 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         savedLocations = myApplication.getMyLocations();
 
         btn_report = findViewById(R.id.btn_report);
-
-        btn_report.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(MapsActivity.this, ReportActivity.class);
-                startActivity(i);
-            }
-        });
+        Intent intent = getIntent();
+        if (intent.hasExtra("coordinatesString")) {
+            btn_report.setVisibility(View.GONE);
+        } else {
+            btn_report.setVisibility(View.VISIBLE);
+            btn_report.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent i = new Intent(MapsActivity.this, ReportActivity.class);
+                    startActivity(i);
+                }
+            });
+        }
 
     }
 
@@ -78,19 +83,34 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap = googleMap;
 
         Intent intent = getIntent();
-        Location location = intent.getParcelableExtra("currentLocation");
+        if (intent.hasExtra("currentLocation")) {
+            Location location = intent.getParcelableExtra("currentLocation");
 
-        double latitude = location.getLatitude();
-        double longitude = location.getLongitude();
+            double latitude = location.getLatitude();
+            double longitude = location.getLongitude();
 
-        LatLng currentLocation = new LatLng(Double.parseDouble(String.valueOf(latitude)), Double.parseDouble(String.valueOf(longitude)));
-        // Now you have the latitude and longitude
-        // You can use them as needed.
+            LatLng currentLocation = new LatLng(Double.parseDouble(String.valueOf(latitude)), Double.parseDouble(String.valueOf(longitude)));
+            // Now you have the latitude and longitude
+            // You can use them as needed.
 
-        mMap.addMarker(new MarkerOptions()
-                .position(currentLocation)
-                .title("Your location"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLocation, 20));
+            mMap.addMarker(new MarkerOptions()
+                    .position(currentLocation)
+                    .title("Your location"));
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLocation, 20));
+        } else if (intent.hasExtra("coordinatesString")) {
+            String coordinatesString = intent.getStringExtra("coordinatesString");
+            String[] arrOfCoordinates = coordinatesString.split(",", 2);
+            String latitude = arrOfCoordinates[0];
+            String longitude = arrOfCoordinates[1];
+
+            // Add a marker in Sydney and move the camera
+            LatLng location = new LatLng(Double.parseDouble(latitude), Double.parseDouble(longitude));
+            mMap.addMarker(new MarkerOptions()
+                    .position(location)
+                    .title("Your location"));
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 20));
+        }
+
 
 
     }
