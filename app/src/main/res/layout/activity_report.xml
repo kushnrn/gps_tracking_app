@@ -10,8 +10,10 @@
         android:id="@+id/tv_labellat"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="32dp"
-        android:text="Lat:"
+        android:text="Latitude:"
+        android:textSize="18dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -21,6 +23,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:text="0.00"
+        android:textSize="18dp"
         app:layout_constraintStart_toEndOf="@+id/tv_labellat"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -28,8 +31,10 @@
         android:id="@+id/tv_labellon"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="16dp"
-        android:text="lon:"
+        android:text="Longitude:"
+        android:textSize="18dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_labellat" />
 
@@ -39,6 +44,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="0.00"
+        android:textSize="18dp"
         app:layout_constraintStart_toEndOf="@+id/tv_labellon"
         app:layout_constraintTop_toBottomOf="@+id/tv_lat" />
 
@@ -46,8 +52,10 @@
         android:id="@+id/tv_labelaltitude"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="16dp"
         android:text="Altitude:"
+        android:textSize="18dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_labellon" />
 
@@ -56,6 +64,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="0.00"
+        android:textSize="18dp"
         app:layout_constraintStart_toEndOf="@+id/tv_labelaltitude"
         app:layout_constraintTop_toTopOf="@+id/tv_labelaltitude" />
 
@@ -63,8 +72,10 @@
         android:id="@+id/tv_labelaccuracy"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="16dp"
         android:text="Accuracy:"
+        android:textSize="18dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_labelaltitude" />
 
@@ -73,6 +84,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="0.00"
+        android:textSize="18dp"
         app:layout_constraintStart_toEndOf="@+id/tv_labelaccuracy"
         app:layout_constraintTop_toTopOf="@+id/tv_labelaccuracy" />
 
@@ -80,8 +92,10 @@
         android:id="@+id/tv_labelspeed"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="16dp"
         android:text="Speed:"
+        android:textSize="18dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_labelaccuracy" />
 
@@ -90,6 +104,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="0.00"
+        android:textSize="18dp"
         app:layout_constraintStart_toEndOf="@+id/tv_labelspeed"
         app:layout_constraintTop_toTopOf="@+id/tv_labelspeed" />
 
@@ -97,16 +112,19 @@
         android:id="@+id/tv_labelsensor"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="16dp"
         android:text="Sensor:"
+        android:textSize="18dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_address" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_speed" />
 
     <TextView
         android:id="@+id/tv_sensor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Cell Tower + Wifi"
+        android:textSize="18dp"
         app:layout_constraintStart_toEndOf="@+id/tv_labelsensor"
         app:layout_constraintTop_toTopOf="@+id/tv_labelsensor" />
 
@@ -115,6 +133,7 @@
         android:id="@+id/tv_address"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textSize="18dp"
         app:layout_constraintStart_toEndOf="@+id/tv_lbladdress"
         app:layout_constraintTop_toTopOf="@+id/tv_lbladdress" />
 
@@ -122,11 +141,88 @@
         android:id="@+id/tv_lbladdress"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="16dp"
         android:text="Address:"
+        android:textSize="18dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_labelspeed" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_labelsensor" />
 
+    <TextView
+        android:id="@+id/tv_postal_code"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18dp"
+        app:layout_constraintStart_toEndOf="@+id/tv_lb_postal_code"
+        app:layout_constraintTop_toTopOf="@+id/tv_lb_postal_code"
+        />
+
+    <TextView
+        android:id="@+id/tv_lb_postal_code"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="16dp"
+        android:text="ZIP code:"
+        android:textSize="18dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_lbladdress" />
+
+    <TextView
+        android:id="@+id/tv_locality"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18dp"
+        app:layout_constraintStart_toEndOf="@+id/tv_lb_locality"
+        app:layout_constraintTop_toTopOf="@+id/tv_lb_locality"
+        />
+
+    <TextView
+        android:id="@+id/tv_lb_locality"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="16dp"
+        android:text="Locality:"
+        android:textSize="18dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_lb_postal_code" />
+
+    <TextView
+        android:id="@+id/tv_country"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18dp"
+        app:layout_constraintStart_toEndOf="@+id/tv_lb_country"
+        app:layout_constraintTop_toTopOf="@+id/tv_lb_country"
+        />
+
+    <TextView
+        android:id="@+id/tv_lb_country"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="16dp"
+        android:text="Country:"
+        android:textSize="18dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_lb_locality" />
+
+    <ImageButton
+        android:id="@+id/reload"
+        android:layout_width="56dp"
+        android:layout_height="53dp"
+        android:layout_marginStart="330dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="620dp"
+        android:background="@color/zxing_transparent"
+        android:contentDescription="reload"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@android:drawable/ic_popup_sync"
+        app:tint="@color/black" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

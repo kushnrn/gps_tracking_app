@@ -9,23 +9,40 @@
 
     <Button
         android:id="@+id/btn_showMap"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="SHOW LOCATION"
+        android:text="FIND MY LOCATION"
+        android:textSize="25dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
 
-    <Button
+<!--    <Button-->
+<!--        android:id="@+id/btn_preferences"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="Settings"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/btn_showMap" />-->
+
+    <ImageButton
         android:id="@+id/btn_preferences"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Settings"
+        android:layout_marginStart="330dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="600dp"
+        android:background="@color/zxing_transparent"
+        android:contentDescription="Settings"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_showMap" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/output_onlinepngtools" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

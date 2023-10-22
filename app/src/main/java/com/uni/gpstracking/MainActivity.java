@@ -14,6 +14,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Switch;
 import android.widget.Toast;
@@ -37,7 +38,8 @@ public class MainActivity extends AppCompatActivity {
     // references to the UI elements
 
 //    TextView tv_lat, tv_lon, tv_altitude, tv_accuracy, tv_speed, tv_updates, tv_sensor, tv_address;
-    Button  btn_showMap, btn_preferences;
+    Button  btn_showMap;
+    ImageButton btn_preferences;
 
     Switch sw_locations_updates, sw_gps;
 
@@ -87,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
         btn_showMap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (currentLocation.getAccuracy() > 40.0) {
+                if (currentLocation.getAccuracy() < 40.0) {
                     Intent i = new Intent(MainActivity.this, MapsActivity.class);
                     i.putExtra("currentLocation", currentLocation);
                     startActivity(i);

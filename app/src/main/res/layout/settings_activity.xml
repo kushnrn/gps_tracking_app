@@ -11,9 +11,12 @@
         android:id="@+id/sw_locations_updates"
         android:layout_width="wrap_content"
         android:layout_height="48dp"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="50dp"
+        android:layout_marginEnd="110dp"
         android:layout_marginBottom="550dp"
         android:text="Enable Location Updates"
+        android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -21,26 +24,28 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.313" />
 
-    <Switch
-        android:id="@+id/sw_gps"
-        android:layout_width="wrap_content"
-        android:layout_height="48dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginBottom="450dp"
-        android:text="GPS/SavePower"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.511"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sw_locations_updates"
-        app:layout_constraintVertical_bias="0.0" />
+<!--    <Switch-->
+<!--        android:id="@+id/sw_gps"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="48dp"-->
+<!--        android:layout_marginTop="50dp"-->
+<!--        android:layout_marginBottom="450dp"-->
+<!--        android:text="GPS/SavePower"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.511"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/sw_locations_updates"-->
+<!--        app:layout_constraintVertical_bias="0.0" />-->
 
 
     <RadioGroup
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:layout_marginBottom="190dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="160dp"
+        android:layout_marginBottom="370dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -53,34 +58,37 @@
             android:layout_marginLeft="20dp"
             android:layout_marginTop="10dp"
             android:checked="true"
-            android:text="High accuracy" />
+            android:text="High Accuracy"
+            android:textSize="16dp" />
 
         <RadioButton
             android:id="@+id/rb_balanced_power"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="2dp"
             android:checked="false"
-            android:text="Balanced power accuracy" />
+            android:text="Balanced Power Accuracy"
+            android:textSize="16dp" />
 
         <RadioButton
             android:id="@+id/rb_low_power"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="2dp"
             android:checked="false"
-            android:text="Low power" />
+            android:text="Low Power"
+            android:textSize="16dp" />
 
-<!--        <RadioButton-->
-<!--            android:id="@+id/rb_no_power"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginLeft="20dp"-->
-<!--            android:layout_marginTop="10dp"-->
-<!--            android:checked="false"-->
-<!--            android:text="No power" />-->
+        <!--        <RadioButton-->
+        <!--            android:id="@+id/rb_no_power"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_marginLeft="20dp"-->
+        <!--            android:layout_marginTop="10dp"-->
+        <!--            android:checked="false"-->
+        <!--            android:text="No power" />-->
 
 
     </RadioGroup>
@@ -89,13 +97,16 @@
         android:id="@+id/rbg_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:layout_marginBottom="400dp"
-        android:text="Pick the method"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="182dp"
+        android:layout_marginBottom="510dp"
+        android:text="Pick Location Method"
+        android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sw_gps" />
+        app:layout_constraintTop_toBottomOf="@+id/sw_locations_updates" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

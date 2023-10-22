@@ -14,6 +14,12 @@ public class MyApplication extends Application{
     public Boolean high_accuracy_on = true;
     public Boolean balanced_accuracy_on = false;
     public Boolean low_power_on = false;
+
+    public String address;
+    public String zipCode;
+    public String locality;
+    public String country;
+
     public String sensor;
 
     private List<Location> myLocations;
@@ -101,5 +107,37 @@ public class MyApplication extends Application{
     public String getSensor() { return sensor; }
 
     public void setSensor(String newSensor) { sensor = newSensor; };
+
+    public void setAddress(String newAddress) {
+        address = newAddress;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setZipCode(String newZipCode) {
+        zipCode = newZipCode;
+    }
+
+    public String getZipCode() {
+        return zipCode;
+    }
+
+    public void setLocality(String newLocality) {
+        locality = newLocality;
+    }
+
+    public String getLocality() {
+        return locality;
+    }
+
+    public void setCountry(String newCountry) {
+        country = newCountry;
+    }
+
+    public String getCountry() {
+        return country;
+    }
 
 }

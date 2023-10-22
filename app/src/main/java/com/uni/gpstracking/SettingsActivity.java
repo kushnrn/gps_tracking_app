@@ -25,30 +25,30 @@ public class SettingsActivity extends MainActivity {
         MyApplication Context = (MyApplication) getApplicationContext();
 
         sw_locations_updates = findViewById(R.id.sw_locations_updates);
-        sw_gps = findViewById(R.id.sw_gps);
-        sw_gps.setChecked(Context.getGpsOn());
+//        sw_gps = findViewById(R.id.sw_gps);
+//        sw_gps.setChecked(Context.getGpsOn());
         rb_high_power = findViewById(R.id.rb_high_power);
         rb_balanced_power = findViewById(R.id.rb_balanced_power);
         rb_low_power = findViewById(R.id.rb_low_power);
 
-        sw_gps.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-//                int currentPriority = locationRequest.getPriority();
-                if (sw_gps.isChecked()) {
-
-                    locationRequest.setPriority(Priority.PRIORITY_HIGH_ACCURACY);
-
-//                    tv_sensor.setText("Using GPS sensors");
-                } else {
-                    locationRequest.setPriority(Priority.PRIORITY_BALANCED_POWER_ACCURACY);
-//                    tv_sensor.setText("Using Towers + WIFI");
-
-                }
-//                int newCurrentPriority = locationRequest.getPriority();
-                Context.setGpsOn(sw_gps.isChecked());
-            }
-        });
+//        sw_gps.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//                if (sw_gps.isChecked()) {
+//
+//                    locationRequest.setPriority(Priority.PRIORITY_HIGH_ACCURACY);
+//
+//
+//                } else {
+//                    locationRequest.setPriority(Priority.PRIORITY_BALANCED_POWER_ACCURACY);
+//
+//
+//                }
+//
+//                Context.setGpsOn(sw_gps.isChecked());
+//            }
+//        });
 
         rb_high_power.setChecked(Context.getHighAccuracyOn());
         rb_high_power.setOnClickListener(new View.OnClickListener() {
