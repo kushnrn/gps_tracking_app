@@ -39,6 +39,7 @@
         android:layout_marginBottom="600dp"
         android:background="@color/zxing_transparent"
         android:contentDescription="Settings"
+        app:tint="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

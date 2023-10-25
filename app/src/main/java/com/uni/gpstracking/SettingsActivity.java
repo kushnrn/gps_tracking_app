@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.RadioButton;
 import android.widget.Switch;
+import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -59,6 +60,10 @@ public class SettingsActivity extends MainActivity {
                 Context.setLowMode(false);
                 Context.setHighAccuracyMode(true);
                 Context.setBalancedMode(false);
+
+                String message = "High accuracy mode is enabled!";
+                int duration = Toast.LENGTH_SHORT; // or Toast.LENGTH_LONG for a longer duration
+                Toast.makeText(SettingsActivity.this, message, duration).show();
             }
         });
 
@@ -72,6 +77,10 @@ public class SettingsActivity extends MainActivity {
                 Context.setHighAccuracyMode(false);
                 Context.setBalancedMode(true);
 
+                String message = "Balanced power accuracy mode is enabled!";
+                int duration = Toast.LENGTH_SHORT; // or Toast.LENGTH_LONG for a longer duration
+                Toast.makeText(SettingsActivity.this, message, duration).show();
+
             }
         });
 
@@ -84,6 +93,10 @@ public class SettingsActivity extends MainActivity {
                 Context.setLowMode(true);
                 Context.setHighAccuracyMode(false);
                 Context.setBalancedMode(false);
+
+                String message = "Low power mode is enabled!";
+                int duration = Toast.LENGTH_SHORT; // or Toast.LENGTH_LONG for a longer duration
+                Toast.makeText(SettingsActivity.this, message, duration).show();
 
             }
         });
